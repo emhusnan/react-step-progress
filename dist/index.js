@@ -1,6 +1,6 @@
 var React = require('react');
 
-var styles = {"overlayed":"_1VXoq","step-index-icon":"_2Fqto","step-icon":"_2JvrO","progress-bar-wrapper":"_53Ji7","step-progress-bar":"_1Lo2h","progress-step":"_2Jtxm","step-index":"_2kL0S","step-label":"_1hzhf","step-label-subtitle":"_1ixJ3","completed":"_2ZUAI","spring-down":"_3SDnc","current":"_35Ago","spring-up":"_JAh3L","has-error":"_1CcaK","shake":"_1ujce","step-content":"_2_g61","step-buttons":"_3uApM","step-action-btn":"_2pGos","action-btn-secondary":"_3CDiP","action-btn-primary":"_hsN1w","disabled":"_2RWmX"};
+var styles = {"overlayed":"_styles-module__overlayed__1VXoq","step-index-icon":"_styles-module__step-index-icon__2Fqto","step-icon":"_styles-module__step-icon__2JvrO","step-index":"_styles-module__step-index__2kL0S","progress-bar-wrapper":"_styles-module__progress-bar-wrapper__53Ji7","step-progress-bar":"_styles-module__step-progress-bar__1Lo2h","progress-step":"_styles-module__progress-step__2Jtxm","step-label":"_styles-module__step-label__1hzhf","step-label-subtitle":"_styles-module__step-label-subtitle__1ixJ3","completed":"_styles-module__completed__2ZUAI","spring-down":"_styles-module__spring-down__3SDnc","current":"_styles-module__current__35Ago","spring-up":"_styles-module__spring-up__JAh3L","has-error":"_styles-module__has-error__1CcaK","shake":"_styles-module__shake__1ujce","step-content":"_styles-module__step-content__2_g61","step-buttons":"_styles-module__step-buttons__3uApM","step-action-btn":"_styles-module__step-action-btn__2pGos","action-btn-secondary":"_styles-module__action-btn-secondary__3CDiP","action-btn-primary":"_styles-module__action-btn-primary__hsN1w","disabled":"_styles-module__disabled__2RWmX"};
 
 var StepStates;
 
@@ -141,12 +141,16 @@ function StepProgressBar(props) {
       strokeWidth: "1.5"
     })))), step.imageIcon == null && step.state === StepStates.ERROR && React.createElement("span", {
       className: styles['step-icon']
-    }, "!"), step.imageIcon == null && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && React.createElement("span", {
+    }, "!"), step.imageIcon === undefined && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && React.createElement("span", {
       className: styles['step-index']
-    }, i + 1), step.imageIcon !== null && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && React.createElement("img", {
+    }, i + 1), step.imageIcon !== undefined && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && React.createElement("div", {
+      className: styles.overlayed
+    }, React.createElement("img", {
       src: step.imageIcon,
       className: styles['step-index-icon']
-    }), React.createElement("div", {
+    }), React.createElement("span", {
+      className: styles['step-icon']
+    }, i + 1)), React.createElement("div", {
       className: styles['step-label'] + " " + (labelClass || '')
     }, step.label, step.subtitle && React.createElement("div", {
       className: styles['step-label-subtitle'] + " " + (subtitleClass || '')

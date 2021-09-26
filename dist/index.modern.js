@@ -1,6 +1,6 @@
 import { useReducer, useState, useEffect, createElement } from 'react';
 
-var styles = {"overlayed":"_1VXoq","step-index-icon":"_2Fqto","step-icon":"_2JvrO","progress-bar-wrapper":"_53Ji7","step-progress-bar":"_1Lo2h","progress-step":"_2Jtxm","step-index":"_2kL0S","step-label":"_1hzhf","step-label-subtitle":"_1ixJ3","completed":"_2ZUAI","spring-down":"_3SDnc","current":"_35Ago","spring-up":"_JAh3L","has-error":"_1CcaK","shake":"_1ujce","step-content":"_2_g61","step-buttons":"_3uApM","step-action-btn":"_2pGos","action-btn-secondary":"_3CDiP","action-btn-primary":"_hsN1w","disabled":"_2RWmX"};
+var styles = {"overlayed":"_styles-module__overlayed__1VXoq","step-index-icon":"_styles-module__step-index-icon__2Fqto","step-icon":"_styles-module__step-icon__2JvrO","step-index":"_styles-module__step-index__2kL0S","progress-bar-wrapper":"_styles-module__progress-bar-wrapper__53Ji7","step-progress-bar":"_styles-module__step-progress-bar__1Lo2h","progress-step":"_styles-module__progress-step__2Jtxm","step-label":"_styles-module__step-label__1hzhf","step-label-subtitle":"_styles-module__step-label-subtitle__1ixJ3","completed":"_styles-module__completed__2ZUAI","spring-down":"_styles-module__spring-down__3SDnc","current":"_styles-module__current__35Ago","spring-up":"_styles-module__spring-up__JAh3L","has-error":"_styles-module__has-error__1CcaK","shake":"_styles-module__shake__1ujce","step-content":"_styles-module__step-content__2_g61","step-buttons":"_styles-module__step-buttons__3uApM","step-action-btn":"_styles-module__step-action-btn__2pGos","action-btn-secondary":"_styles-module__action-btn-secondary__3CDiP","action-btn-primary":"_styles-module__action-btn-primary__hsN1w","disabled":"_styles-module__disabled__2RWmX"};
 
 var StepStates;
 
@@ -26,30 +26,25 @@ function stepsReducer(steps, action) {
 }
 
 function StepProgressBar(props) {
-  var steps = props.steps,
-      startingStep = props.startingStep,
-      wrapperClass = props.wrapperClass,
-      progressClass = props.progressClass,
-      stepClass = props.stepClass,
-      labelClass = props.labelClass,
-      subtitleClass = props.subtitleClass,
-      contentClass = props.contentClass,
-      buttonWrapperClass = props.buttonWrapperClass,
-      primaryBtnClass = props.primaryBtnClass,
-      secondaryBtnClass = props.secondaryBtnClass,
-      submitBtnName = props.submitBtnName,
-      onSubmit = props.onSubmit,
-      previousBtnName = props.previousBtnName,
-      nextBtnName = props.nextBtnName;
-
-  var _React$useReducer = useReducer(stepsReducer, steps),
-      state = _React$useReducer[0],
-      dispatch = _React$useReducer[1];
-
-  var _React$useState = useState(startingStep),
-      currentIndex = _React$useState[0],
-      setCurrentIndex = _React$useState[1];
-
+  const {
+    steps,
+    startingStep,
+    wrapperClass,
+    progressClass,
+    stepClass,
+    labelClass,
+    subtitleClass,
+    contentClass,
+    buttonWrapperClass,
+    primaryBtnClass,
+    secondaryBtnClass,
+    submitBtnName,
+    onSubmit,
+    previousBtnName,
+    nextBtnName
+  } = props;
+  const [state, dispatch] = useReducer(stepsReducer, steps);
+  const [currentIndex, setCurrentIndex] = useState(startingStep);
   useEffect(function () {
     dispatch({
       type: 'init',
@@ -69,8 +64,8 @@ function StepProgressBar(props) {
       return;
     }
 
-    var isStateValid = true;
-    var stepValidator = state[currentIndex].validator;
+    let isStateValid = true;
+    const stepValidator = state[currentIndex].validator;
 
     if (stepValidator) {
       isStateValid = stepValidator();
@@ -105,13 +100,13 @@ function StepProgressBar(props) {
   }
 
   return createElement("div", {
-    className: styles['progress-bar-wrapper'] + " " + (wrapperClass || '')
+    className: `${styles['progress-bar-wrapper']} ${wrapperClass || ''}`
   }, createElement("ul", {
-    className: styles['step-progress-bar'] + " " + (progressClass || '')
+    className: `${styles['step-progress-bar']} ${progressClass || ''}`
   }, state.map(function (step, i) {
     return createElement("li", {
       key: i,
-      className: "" + styles['progress-step'] + (step.state === StepStates.COMPLETED ? " " + styles.completed : '') + (step.state === StepStates.CURRENT ? " " + styles.current : '') + (step.state === StepStates.ERROR ? " " + styles['has-error'] : '') + " " + (stepClass || '')
+      className: `${styles['progress-step']}${step.state === StepStates.COMPLETED ? ` ${styles.completed}` : ''}${step.state === StepStates.CURRENT ? ` ${styles.current}` : ''}${step.state === StepStates.ERROR ? ` ${styles['has-error']}` : ''} ${stepClass || ''}`
     }, step.imageIcon == null && step.state === StepStates.COMPLETED && createElement("span", {
       className: styles['step-icon']
     }, createElement("svg", {
@@ -141,28 +136,32 @@ function StepProgressBar(props) {
       strokeWidth: "1.5"
     })))), step.imageIcon == null && step.state === StepStates.ERROR && createElement("span", {
       className: styles['step-icon']
-    }, "!"), step.imageIcon == null && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && createElement("span", {
+    }, "!"), step.imageIcon === undefined && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && createElement("span", {
       className: styles['step-index']
-    }, i + 1), step.imageIcon !== null && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && createElement("img", {
+    }, i + 1), step.imageIcon !== undefined && step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && createElement("div", {
+      className: styles.overlayed
+    }, createElement("img", {
       src: step.imageIcon,
       className: styles['step-index-icon']
-    }), createElement("div", {
-      className: styles['step-label'] + " " + (labelClass || '')
+    }), createElement("span", {
+      className: styles['step-icon']
+    }, i + 1)), createElement("div", {
+      className: `${styles['step-label']} ${labelClass || ''}`
     }, step.label, step.subtitle && createElement("div", {
-      className: styles['step-label-subtitle'] + " " + (subtitleClass || '')
+      className: `${styles['step-label-subtitle']} ${subtitleClass || ''}`
     }, step.subtitle)));
   })), createElement("div", {
-    className: styles['step-content'] + " " + (contentClass || '')
+    className: `${styles['step-content']} ${contentClass || ''}`
   }, props.steps[currentIndex].content), createElement("div", {
-    className: styles['step-buttons'] + " " + (buttonWrapperClass || '')
+    className: `${styles['step-buttons']} ${buttonWrapperClass || ''}`
   }, createElement("a", {
-    className: styles['step-action-btn'] + " " + styles['action-btn-secondary'] + " " + (currentIndex === 0 ? styles.disabled : '') + " " + (secondaryBtnClass || ''),
+    className: `${styles['step-action-btn']} ${styles['action-btn-secondary']} ${currentIndex === 0 ? styles.disabled : ''} ${secondaryBtnClass || ''}`,
     onClick: prevHandler
   }, previousBtnName || 'Previous'), currentIndex === state.length - 1 ? createElement("a", {
-    className: styles['step-action-btn'] + " " + styles['action-btn-primary'] + " " + (primaryBtnClass || ''),
+    className: `${styles['step-action-btn']} ${styles['action-btn-primary']} ${primaryBtnClass || ''}`,
     onClick: submitHandler
   }, submitBtnName || 'Submit') : createElement("a", {
-    className: styles['step-action-btn'] + " " + styles['action-btn-primary'] + " " + (primaryBtnClass || ''),
+    className: `${styles['step-action-btn']} ${styles['action-btn-primary']} ${primaryBtnClass || ''}`,
     onClick: nextHandler
   }, nextBtnName || 'Next')));
 }
