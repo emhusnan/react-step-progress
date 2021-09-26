@@ -27,6 +27,7 @@ interface ProgressStep {
   label: string;
   subtitle?: string;
   name: string;
+  imageIcon: string;
   state?: StepStates;
   content: React.ReactNode;
   validator?: (payload?: any) => boolean;

@@ -1,3 +1,17 @@
+.overlayed .step-index-icon{
+
+  margin-right: 15px;
+}
+.overlayed .step-icon {
+  opacity: 1;
+  transition: .5s ease;
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
 .progress-bar-wrapper {
   padding: 2rem;
 }
@@ -43,9 +57,9 @@
   background-color: #e7eaf3;
   color: var(--text-normal);
   border-radius: 50%;
-  height: 2.5rem;
-  width: 2.5rem;
-  line-height: 2.5rem;
+  height: 2rem;
+  width: 2rem;
+  line-height: 2rem;
   display: inline-flex;
   transform-origin: center;
   align-items: center;

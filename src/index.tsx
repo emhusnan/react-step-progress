@@ -1,12 +1,9 @@
 import * as React from 'react';
 import styles from './styles.module.css';
-
 import { StepStates, ProgressStep, StepProgressProps, ReducerAction } from './models';
 
 function stepsReducer(steps: ProgressStep[], action: ReducerAction): ProgressStep[] {
-
   return steps.map(function (step, i) {
-
     if (i < action.payload.index) {
       step.state = StepStates.COMPLETED;
     } else if (i === action.payload.index) {
@@ -51,7 +48,6 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
   }
 
   function nextHandler(): void {
-
     if (currentIndex === steps.length - 1) {
       return;
     }
@@ -75,7 +71,6 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
   }
 
   function prevHandler(): void {
-
     if (currentIndex === 0) {
       return;
     }
@@ -103,7 +98,7 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
                 step.state === StepStates.ERROR ? ` ${styles['has-error']}` : ''
               } ${stepClass || ''}`}
             >
-              {step.state === StepStates.COMPLETED && (
+              {step.imageIcon == null && step.state === StepStates.COMPLETED && (
                 <span className={styles['step-icon']}>
                   <svg
                     width="1.5rem"
@@ -115,10 +110,37 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
                   </svg>
                 </span>
               )}
-              {step.state === StepStates.ERROR && <span className={styles['step-icon']}>!</span>}
-              {step.state !== StepStates.COMPLETED && step.state !== StepStates.ERROR && (
-                <span className={styles['step-index']}>{i + 1}</span>
+
+              {step.imageIcon != null && step.state === StepStates.COMPLETED && (
+                <div className={styles.overlayed}>
+                  <img src={step.imageIcon} className={styles['step-index-icon']} />
+
+                  <span className={styles['step-icon']}>
+                    <svg
+                      width="1.3rem"
+                      viewBox="0 0 13 9"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M1 3.5L4.5 7.5L12 1" stroke="white" strokeWidth="1.5" />
+                    </svg>
+                  </span>
+                </div>
               )}
+
+              {step.imageIcon == null && step.state === StepStates.ERROR && (
+                <span className={styles['step-icon']}>!</span>
+              )}
+              {step.imageIcon == null &&
+                step.state !== StepStates.COMPLETED &&
+                step.state !== StepStates.ERROR && (
+                  <span className={styles['step-index']}>{i + 1}</span>
+                )}
+              {step.imageIcon !== null &&
+                step.state !== StepStates.COMPLETED &&
+                step.state !== StepStates.ERROR && (
+                  <img src={step.imageIcon} className={styles['step-index-icon']} />
+                )}
               <div className={`${styles['step-label']} ${labelClass || ''}`}>
                 {step.label}
                 {step.subtitle && (
@@ -143,7 +165,7 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
           } ${secondaryBtnClass || ''}`}
           onClick={prevHandler}
         >
-          {previousBtnName ? previousBtnName : 'Previous'}
+          {previousBtnName || 'Previous'}
         </a>
         {currentIndex === state.length - 1 ? (
           <a
@@ -161,7 +183,7 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
             }`}
             onClick={nextHandler}
           >
-            {nextBtnName ? nextBtnName : 'Next'}
+            {nextBtnName || 'Next'}
           </a>
         )}
       </div>
