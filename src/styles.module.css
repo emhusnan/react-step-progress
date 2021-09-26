@@ -95,12 +95,16 @@
 .progress-step.completed .step-icon:hover {
   background-color: #42997f;
 }
-.progress-step.current .step-index {
+.progress-step.current .step-index,
+.progress-step.current .step-icon
+{
   background-color: #387cf6;
   color: white;
   animation: spring-up 400ms ease forwards;
 }
-.progress-step.current .step-index:hover {
+.progress-step.current .step-index:hover,
+.progress-step.current .step-icon:hover
+{
   background-color: #316ddb;
 }
 .progress-step.completed::before,

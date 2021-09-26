@@ -96,13 +96,17 @@
 ._styles-module__progress-step__2Jtxm._styles-module__completed__2ZUAI ._styles-module__step-icon__2JvrO:hover {
   background-color: #42997f;
 }
-._styles-module__progress-step__2Jtxm._styles-module__current__35Ago ._styles-module__step-index__2kL0S {
+._styles-module__progress-step__2Jtxm._styles-module__current__35Ago ._styles-module__step-index__2kL0S,
+._styles-module__progress-step__2Jtxm._styles-module__current__35Ago ._styles-module__step-icon__2JvrO
+{
   background-color: #387cf6;
   color: white;
   -webkit-animation: _styles-module__spring-up__JAh3L 400ms ease forwards;
           animation: _styles-module__spring-up__JAh3L 400ms ease forwards;
 }
-._styles-module__progress-step__2Jtxm._styles-module__current__35Ago ._styles-module__step-index__2kL0S:hover {
+._styles-module__progress-step__2Jtxm._styles-module__current__35Ago ._styles-module__step-index__2kL0S:hover,
+._styles-module__progress-step__2Jtxm._styles-module__current__35Ago ._styles-module__step-icon__2JvrO:hover
+{
   background-color: #316ddb;
 }
 ._styles-module__progress-step__2Jtxm._styles-module__completed__2ZUAI::before,
