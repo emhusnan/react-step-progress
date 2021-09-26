@@ -131,15 +131,20 @@ function StepProgressBar(props: StepProgressProps): JSX.Element {
               {step.imageIcon == null && step.state === StepStates.ERROR && (
                 <span className={styles['step-icon']}>!</span>
               )}
-              {step.imageIcon == null &&
+
+              {step.imageIcon === undefined &&
                 step.state !== StepStates.COMPLETED &&
                 step.state !== StepStates.ERROR && (
                   <span className={styles['step-index']}>{i + 1}</span>
                 )}
-              {step.imageIcon !== null &&
+
+              {step.imageIcon !== undefined &&
                 step.state !== StepStates.COMPLETED &&
                 step.state !== StepStates.ERROR && (
-                  <img src={step.imageIcon} className={styles['step-index-icon']} />
+                  <div className={styles.overlayed}>
+                    <img src={step.imageIcon} className={styles['step-index-icon']} />
+                    <span className={styles['step-icon']}>{i + 1}</span>
+                  </div>
                 )}
               <div className={`${styles['step-label']} ${labelClass || ''}`}>
                 {step.label}

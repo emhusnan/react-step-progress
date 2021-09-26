@@ -2,7 +2,16 @@
 
   margin-right: 15px;
 }
+
 .overlayed .step-icon {
+  opacity: 1;
+  transition: .5s ease;
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  text-align: center;
+}
+.overlayed .step-index{
   opacity: 1;
   transition: .5s ease;
   position: absolute;
@@ -11,6 +20,7 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
+
 }
 .progress-bar-wrapper {
   padding: 2rem;
@@ -52,8 +62,7 @@
 .progress-step:first-child::before {
   content: none;
 }
-.progress-step .step-index,
-.progress-step .step-icon {
+.progress-step .step-index , .progress-step .step-icon {
   background-color: #e7eaf3;
   color: var(--text-normal);
   border-radius: 50%;
